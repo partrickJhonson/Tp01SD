@@ -5,10 +5,10 @@ from uuid import uuid4
 class Cadastro(models.Model):
 #Geral
     id_bidentificador = models.UUIDField(primary_key=True, default=uuid4,editable=False)
-    titulo = models.CharField(max_length=20,null=True)
+    titulo = models.CharField(max_length=20)
     catalogo = models.CharField(max_length=20,null=True)
     EntradaNoCatalogo = models.DateField(auto_now_add=True)
-    Lingua = models.CharField(max_length=20,null=True)
+    Lingua = models.CharField(max_length=20)
     Descrisao = models.CharField(max_length=20,null=True)
     palavrachave= models.CharField(max_length=20,null=True)
     Corbertura = models.CharField(max_length=20,null=True)
@@ -67,7 +67,7 @@ class Cadastro(models.Model):
     taxonEntrada = models.CharField(max_length=20,null=True)
     classificacaoDescrisao = models.CharField(max_length=20,null=True)
     PalavraPasseClassificacao = models.CharField(max_length=20,null=True)
-    autor = models.CharField(max_length=20,null=True)
+    autor = models.CharField(max_length=20)
     ano_pulicacao = models.IntegerField(default=2020)
     estado = models.CharField(max_length=20,null=True)
     Npaginas = models.IntegerField(default=0)

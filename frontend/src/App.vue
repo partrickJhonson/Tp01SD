@@ -8,6 +8,14 @@
     </nav>
 
     <div class="container">
+      <ul>
+        <li v-for="(erro,index) of errors" :key="index">
+          compo<b>{{erro.field}}</b> - {{erro.defaultMessage}}
+        </li>
+
+      </ul>
+
+
       <form @submit.prevent="salvar">         
         <h2>Dados Gerais</h2>
         <hr>
@@ -241,9 +249,10 @@ export default{
   data(){
     return{
       objetos:[],
+      errosrs:[],
       objeto:{
-    titulo:'.',
-    catalogo:'.',
+    titulo:'',
+    catalogo:'',
     lingua:'null',
     descrisao:'null',
     palavrachave:'null',
@@ -251,82 +260,92 @@ export default{
     estrtura:'null',
     niveldeAgregacao:0,
 //Ciclo de Vida
-    Versao:'.',
-    Status:'.',
-    ContribuinteFuncao:'.',
-    ContribuinteEntidadae:'.',
-    ContribuinteData:'.',
+    Versao:'',
+    Status:'',
+    ContribuinteFuncao:'',
+    ContribuinteEntidadae:'',
+    ContribuinteData:'',
 //Meta-Metadados
-    identificador:'.',
-    catalogoMeta:'.',
-    catalogoMetaEntrada:'.',
-    catalogoMetaData:'.',
-    EsquemaMeta:'.',
-    idiomameta:'.',
+    identificador:'',
+    catalogoMeta:'',
+    catalogoMetaEntrada:'',
+    catalogoMetaData:'',
+    EsquemaMeta:'',
+    idiomameta:'',
 //Tecnico
-    formato:'.',
-    tamanho:'.',
-    localizacao:'.',
-    requisitoTipo:'.',
-    requisitoNome:'.',
-    Observacao:'.',
-    outrosRequitos:'.',
-    duracao:'.',
+    formato:'',
+    tamanho:'',
+    localizacao:'',
+    requisitoTipo:'',
+    requisitoNome:'',
+    Observacao:'',
+    outrosRequitos:'',
+    duracao:'',
 //Educaional
-    tipodeinteratividade:'.',
-    tipodeRecursodeAprendizagem:'.',
-    niveldeinteratividade:'.',
-    densidadesemantica:'.',
-    funcaodousuariofinalpretendido:'.',
-    contexto:'.',
-    faixaEtaria:'.',
-    dificuldade:'.',
-    TempodeAprendizagem:'.',
-    DescrisaoEducacional:'.',
-    idioma:'.',
+    tipodeinteratividade:'',
+    tipodeRecursodeAprendizagem:'',
+    niveldeinteratividade:'',
+    densidadesemantica:'',
+    funcaodousuariofinalpretendido:'',
+    contexto:'',
+    faixaEtaria:'',
+    dificuldade:'',
+    TempodeAprendizagem:'',
+    DescrisaoEducacional:'',
+    idioma:'',
 //Direitos
-    custo:'.',
-    DireitosautoraisRestricoes:'.',
-    DescrisaoDireitos:'.',
+    custo:'',
+    DireitosautoraisRestricoes:'',
+    DescrisaoDireitos:'',
 //Relacao
-    tipoRelacao:'.',
-    recursoRelacao :'.',
+    tipoRelacao:'',
+    recursoRelacao :'',
 //Anotação
-    pessoaAnotacao:'.',
-    dataanotacao:'.',
-    descrisaoanotacao:'.',
+    pessoaAnotacao:'',
+    dataanotacao:'',
+    descrisaoanotacao:'',
 //Clasificao
-    closificacaoObjetivo:'.',
-    taxon:'.',
-    taxonFonte:'.',
-    taxonId:'.',
-    taxonEntrada:'.',
-    classificacaoDescrisao:'.',
-    PalavraPasseClassificacao:'.',
-    autor:'.',
+    closificacaoObjetivo:'',
+    taxon:'',
+    taxonFonte:'',
+    taxonId:'',
+    taxonEntrada:'',
+    classificacaoDescrisao:'',
+    PalavraPasseClassificacao:'',
+    autor:'',
     ano_pulicacao:0,
-    estado:'.',
+    estado:'',
     Npaginas:0,
-    editora:'.', 
+    editora:'' 
       },
 
     }
   },
 
   mounted(){
-    objeto.listar().then(resposta => {
-      console.log(resposta.data)
-      this.objetos = resposta.data
-    })
+    this.listar();
+    this.objeto={}
   },
   methods:{
+
+    listar(){
+      objeto.listar().then(resposta => {
+      this.objetos = resposta.data
+    })
+    },
     salvar(){
-      objeto.salvar(this.objeto)
-      // then(resposta =>{
-      //   alert('Salvo com Sucesso'+resposta.log)
-      // }).catch(alert('Erro as Salvar')+Error)     
+      objeto.salvar(this.objeto).
+      then(resposta =>{
+        this.objeto={}
+        alert('Salvo com Sucesso'+resposta.log)
+        this.listar()
+      }).catch(e => {
+         this.errors = e.resposta.data.errors
+      })
+      
 
     }
+
   }
 
 }
