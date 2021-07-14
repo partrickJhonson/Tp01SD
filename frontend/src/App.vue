@@ -9,7 +9,7 @@
 
     <div class="container">
       <ul>
-        <li v-for="(erro,index) of errors" :key="index">
+        <li v-for="(erro,index) of errosrs" :key="index">
           compo<b>{{erro.field}}</b> - {{erro.defaultMessage}}
         </li>
 
@@ -337,12 +337,9 @@ export default{
       objeto.salvar(this.objeto).
       then(resposta =>{
         this.objeto={}
-        alert('Salvo com Sucesso'+resposta.log)
+        alert('Salvo com Sucesso'+resposta)
         this.listar()
-      }).catch(e => {
-         this.errors = e.resposta.data.errors
-      })
-      
+      })      
 
     }
 
