@@ -349,9 +349,6 @@ export default{
       excluir(){
         alert('Em desenvolvimento')
       }      
-
-    
-
   }
 
 }
