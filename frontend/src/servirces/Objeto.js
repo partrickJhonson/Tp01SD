@@ -1,4 +1,4 @@
-import { http } from "./config";
+import { http } from "./config"; // importa a  constante que contem o endereço da api
 
 export default {
     listar: () => {

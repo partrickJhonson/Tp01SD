@@ -1,21 +1,14 @@
+<!-- inicio da definição do templete da telas -->
 <template>
   <div id="app">
 
     <nav>
       <div class="nav-wrapper blue darken-1">
-        <a href="//" class="brand-logo center">Produtos Front</a>
+        <a href="//" class="brand-logo center"> Cadastro de Metadados</a>
       </div>
     </nav>
 
     <div class="container">
-      <ul>
-        <li v-for="(erro,index) of errosrs" :key="index">
-          compo<b>{{erro.field}}</b> - {{erro.defaultMessage}}
-        </li>
-
-      </ul>
-
-
       <form @submit.prevent="salvar">         
         <h2>Dados Gerais</h2>
         <hr>
@@ -206,10 +199,14 @@
         <label>editora</label>
         <input type="text" placeholder="editora" v-model="objeto.editora">
         <button class="waves-effect waves-light btn-small">Salvar</button>
+      
+      
       </form>
+      
 
-      <table>
+        <h2 class="brand-logo center"> Objetos Salvos</h2>
 
+      <table @submit.prevent="">        
         <thead>
 
           <tr>
@@ -229,7 +226,7 @@
             <td>{{ objeto.titulo }}</td>
             <td>{{ objeto.Npaginas }}</td>
             <td>
-              <button class="waves-effect btn-small red darken-1">Excluir</button>
+              <button v-on:click="excluir()" class="waves-effect btn-small red darken-1">Excluir</button>
             </td>
 
           </tr>
@@ -242,22 +239,25 @@
 
   </div>
 </template>
+
+<!-- Apartir desse ponto inicia as implemtações para a comunicação com a api -->
 <script>
-import objeto from "./servirces/Objeto"
+//inicio da definição do templete da telas
+import objeto from "./servirces/Objeto" //Componente responsavel por realizar a comunicação com a api
 
 export default{
-  data(){
+  data(){//Variaveis
     return{
-      objetos:[],
-      errosrs:[],
-      objeto:{
+      objetos:[],//Varivel que recebe todos os objetos salvos na base de dados
+      errors:[],//Gurda os erros para aletar o usuario
+      objeto:{//Variavel para guardar todos os dados os Campos do IEELOM 
     titulo:'',
     catalogo:'',
-    lingua:'null',
-    descrisao:'null',
-    palavrachave:'null',
-    corbertura:'null',
-    estrtura:'null',
+    lingua:'',
+    descrisao:'',
+    palavrachave:'',
+    corbertura:'',
+    estrtura:'',
     niveldeAgregacao:0,
 //Ciclo de Vida
     Versao:'',
@@ -321,27 +321,36 @@ export default{
 
     }
   },
-
-  mounted(){
+//Inicio das Funções 
+  mounted(){//Ao abri o site realiza a listagem dos dados é inicia a varivel que ira receber os dados para cadastro
     this.listar();
     this.objeto={}
   },
-  methods:{
+  methods:{// funções que tratam a comunicação com a api. OBS a comunicação é feita pelo componente o objeto aki é feito apenas os tratamentos dos dados
 
     listar(){
       objeto.listar().then(resposta => {
       this.objetos = resposta.data
+    }).catch(e => {
+      alert("Erro ao conectar com o backend, retonorno:"+e)
     })
     },
     salvar(){
       objeto.salvar(this.objeto).
       then(resposta =>{
         this.objeto={}
-        alert('Salvo com Sucesso'+resposta)
+        alert(resposta.data.titulo+' salvo com Sucesso')
         this.listar()
-      })      
+      }).catch(e => {
+        console.log(e.response.data.errors),
+        alert(e.request.response)
+      })
+    },
+      excluir(){
+        alert('Em desenvolvimento')
+      }      
 
-    }
+    
 
   }
 
