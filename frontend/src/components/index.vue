@@ -171,7 +171,7 @@ export default{
     },
     Alterar(id){
       this.$router.push('/Cadastro/'+id),
-      alert('/Cadastro/'+id)
+      this.$codalterar=id
     }
            
   }

@@ -3,7 +3,9 @@
 
     <nav>
       <div class="nav-wrapper blue darken-1">
-        <a href="//" class="brand-logo center"> Cabeçalho</a>
+        <a  href="//" class="brand-logo center"> Cabeçalho</a>
+    
+
       </div>
     </nav>
     <router-view></router-view><!--Instancia as rotas no app principal -->
@@ -14,7 +16,12 @@
 <script>
 export default{
   mounted(){ //Ao abri o site direciona pra index
-     this.$router.push('/index');
-     
-  }}
+     this.$router.push('/index');     
+  },data(){
+    return{
+    codalterar:'387b5b34-da30-4f73-9ef5-93bfac010beb'
+    }
+  }
+  
+  }
 </script>

@@ -11,4 +11,4 @@ class BuscarViewSet(viewsets.ModelViewSet):
     serializer_class = serializer.CadastroSerializer
     queryset = models.Cadastro.objects.all()
     filter_backends =[DjangoFilterBackend]
-    filterset_fields= ['titulo','Npaginas','autor','ano_pulicacao']
+    filterset_fields= ['titulo','Npaginas','autor','ano_pulicacao','id_bidentificador']

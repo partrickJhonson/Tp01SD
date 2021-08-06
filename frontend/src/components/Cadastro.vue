@@ -291,9 +291,11 @@ export default{
   },
 //Inicio das Funções 
   mounted(){//Ao abri o site realiza a listagem dos dados é inicia a varivel que ira receber os dados para cadastro
-    this.listar();
-    this.objeto={}
-  },
+    objeto.BuscarId(this.$codalterar).
+    then(resposta=>{
+    this.objetos = resposta.data   
+    alert('retorno '+resposta.data.titulo)
+  })},
   methods:{// funções que tratam a comunicação com a api. OBS a comunicação é feita pelo componente o objeto aki é feito apenas os tratamentos dos dados
 
     listar(){
@@ -319,5 +321,4 @@ export default{
   }
 
 }
-
 </script>
