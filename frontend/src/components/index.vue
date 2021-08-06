@@ -27,7 +27,8 @@
             <td>{{ objeto.titulo }}</td>
             <td>{{ objeto.Npaginas }}</td>
             <td>
-              <button v-on:click="Excluir(this.objeto.id_bidentificador) " class="waves-effect btn-small red darken-1">Excluir</button>
+              <button @click.prevent="Excluir(objeto.id_bidentificador) " class="waves-effect btn-small red darken-1">Excluir</button>
+              <button @click.prevent="Alterar(objeto.id_bidentificador) " class="waves-effect btn-small green darken-1">Alterar</button>
             </td>
 
           </tr>
@@ -145,12 +146,13 @@ export default{
         console.log(e.response.data.errors),
         alert(e.request.response)
       })},
-      Excluir(id){
-      objeto.delete(id).
-      then(resposta =>{
+      Excluir(id){          
+        alert(id),
+        objeto.delete(id).
+        then(id=>{
         this.objeto={},
-        alert(resposta.data.titulo+' salvo com Sucesso').
-        this.listar()
+        this.listar(),
+        alert('user id='+id+' Excluido com Sucesso')
       }).catch(e => {
         alert("Erro:"+e),
         console.log(e.response.data.errors),
@@ -166,6 +168,10 @@ export default{
     })},
     Ircad(){
         this.$router.push('/Cadastro')
+    },
+    Alterar(id){
+      this.$router.push('/Cadastro/'+id),
+      alert('/Cadastro/'+id)
     }
            
   }

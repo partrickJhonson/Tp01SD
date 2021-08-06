@@ -14,6 +14,7 @@
 <script>
 export default{
   mounted(){ //Ao abri o site direciona pra index
-    this.$router.push('/index');
+     this.$router.push('/index');
+     
   }}
 </script>

@@ -315,10 +315,7 @@ export default{
        })},
     Volta(){
         this.$router.push('/index')
-    },
-      excluir(){
-        alert('Em desenvolvimento')
-      }      
+    }, 
   }
 
 }
