@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework.views import viewsets
+from . import models
+from . import serializer
+from Backend import cadastro
 
-# Create your views here.
+class Cadastro_Buscar(viewsets.ModelViewSet):
+    queryset = models.cadastro.objects.all()
+    serializer = serializer(cadastro.data)
+    

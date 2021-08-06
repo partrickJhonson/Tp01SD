@@ -17,12 +17,12 @@ from django.contrib import admin
 from django.urls import path,include
 
 from rest_framework import routers
-from cadastro.api import viewsets as cadastroviewsetes
+from cadastro.api import viewsets as cadastroviewsetes,viewsets as  BuscarViewSet
 
 
 route = routers.DefaultRouter()
 route.register(r'cadastro',cadastroviewsetes.CadastroViewSet, basename="Cadastro")
-
+route.register(r'buscar',BuscarViewSet.BuscarViewSet, basename="Buscar")
 
 
 urlpatterns = [
