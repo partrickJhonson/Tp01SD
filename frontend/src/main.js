@@ -10,7 +10,7 @@ const router = new VueRouter({
     routes: [
         {path: '/Cadastro',component: Cadastro},
         {path: '/index'   ,component: Index},
-        {path: '/'        ,redirect : Index}//Direciona o user para a rota inicial
+        {path: '/'         ,redirect : Cadastro},//Direciona o user para a rota inicia
     ]
 
 })

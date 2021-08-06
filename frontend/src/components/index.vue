@@ -1,10 +1,11 @@
 <!-- inicio da definição do templete da telas -->
 <template>
   <div id="app">
+      <th> <button v-on:click="Ircad()" class="waves-effect btn-small lilac darken-1">Pesquisar</button> </th>
       <h2 class="brand-logo center"> Coleção de Obejetos</h2>
       <div >
            <th><input   type="text" placeholder="autor" name="input"> </th>
-           <th> <button v-on:click="excluir()" class="waves-effect btn-small blue darken-1">Pesquisar</button> </th>
+           <th> <button v-on:click="Pesquisar()" class="waves-effect btn-small blue darken-1">Pesquisar</button> </th>
             
        </div>
       <table @submit.prevent="">        
@@ -145,7 +146,7 @@ export default{
         alert(e.request.response)
       })
     },
-      excluir(){
+    Pesquisar(){
         const field = document.querySelector("input[name=input]").value
         alert('Em desenvolvimento'+ field)
         objeto.Buscar(field).
@@ -154,8 +155,11 @@ export default{
             alert("Funfou:"+resposta.data)
         }).catch(e => {
       alert("Erro ao conectar com o backend, retonorno:"+e)
-    })
-      }      
+    })},
+    Ircad(){
+        this.$router.push('/Cadastro')
+    }
+           
   }
 
 }

@@ -7,7 +7,7 @@
         <a href="//" class="brand-logo center"> Cabeçalho</a>
       </div>
     </nav>
-    <router-view></router-view><!--Instancia as rotas no app principal-->
+    <router-view></router-view><!--Instancia as rotas no app principal -->
   </div>
 </template>
 

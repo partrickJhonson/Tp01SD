@@ -1,7 +1,7 @@
 <!-- inicio da definição do templete da telas -->
 <template>
   <div id="app">
-
+   <th> <button v-on:click="Volta()" class="waves-effect btn-small lilac darken-1">Pagína Inicial</button> </th>  
     <nav>
       <div class="nav-wrapper blue darken-1">
         <a href="//" class="brand-logo center"> Cadastro de Metadados</a>
@@ -345,7 +345,9 @@ export default{
       }).catch(e => {
         console.log(e.response.data.errors),
         alert(e.request.response)
-      })
+       })},
+    Volta(){
+        this.$router.push('/index')
     },
       excluir(){
         alert('Em desenvolvimento')

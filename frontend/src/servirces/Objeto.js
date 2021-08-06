@@ -8,7 +8,7 @@ export default {
     salvar: (objeto) => {
         return http.post('cadastro/', objeto)
     },
-    Buscar: (titulo) => {
-        return http.get('buscar/?autor='+titulo)
+    Buscar: (textoBusca) => {
+        return http.get('buscar/?autor='+textoBusca)//Montar uma string com campo concatenando todos os campos com a texto a ser buscado
     },
 }
