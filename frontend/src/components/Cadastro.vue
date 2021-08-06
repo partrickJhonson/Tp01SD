@@ -203,39 +203,6 @@
       
       
       </form>
-      
-
-        <h2 class="brand-logo center"> Objetos Salvos</h2>
-
-      <table @submit.prevent="">        
-        <thead>
-
-          <tr>
-            <th>Autor</th>
-            <th>Titulo</th>
-            <th>N° Páginas</th>
-            <th>OPÇÕES</th>
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-          <tr v-for="objeto of objetos" :key="objeto.id">
-
-            <td>{{ objeto.autor }}</td>
-            <td>{{ objeto.titulo }}</td>
-            <td>{{ objeto.Npaginas }}</td>
-            <td>
-              <button v-on:click="excluir()" class="waves-effect btn-small red darken-1">Excluir</button>
-            </td>
-
-          </tr>
-
-        </tbody>
-      
-      </table>
-
     </div>
 
   </div>

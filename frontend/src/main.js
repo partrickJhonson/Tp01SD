@@ -5,14 +5,12 @@ import Cadastro from './components/Cadastro'
 import Index    from './components/index'
 
 Vue.use(VueRouter)
-
 const router = new VueRouter({
-    mode:'history',
+    //mode:'history',
     routes: [
         {path: '/Cadastro',component: Cadastro},
         {path: '/index',component: Index},
-        {path: '',redirect : Index},//Direciona o user para a rota inicia
-        {path: '/',redirect : Index},
+        {path: '/',redirect: Index}//Direciona o user para a rota inicia
     ]
 
 })

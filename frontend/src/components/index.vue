@@ -1,7 +1,7 @@
 <!-- inicio da definição do templete da telas -->
 <template>
   <div id="app">
-      <th> <button v-on:click="Ircad()" class="waves-effect btn-small lilac darken-1">Pesquisar</button> </th>
+      <th> <button v-on:click="Ircad()" class="waves-effect btn-small lilac darken-1">Cadastrar</button> </th>
       <h2 class="brand-logo center"> Coleção de Obejetos</h2>
       <div >
            <th><input   type="text" placeholder="autor" name="input"> </th>
@@ -27,7 +27,7 @@
             <td>{{ objeto.titulo }}</td>
             <td>{{ objeto.Npaginas }}</td>
             <td>
-              <button v-on:click="excluir(id_bidentificador)" class="waves-effect btn-small red darken-1">Excluir</button>
+              <button v-on:click="Excluir(this.objeto.id_bidentificador) " class="waves-effect btn-small red darken-1">Excluir</button>
             </td>
 
           </tr>
@@ -138,21 +138,29 @@ export default{
     salvar(){
       objeto.salvar(this.objeto).
       then(resposta =>{
-        this.objeto={}
-        alert(resposta.data.titulo+' salvo com Sucesso')
+        this.objeto={},
+        alert(resposta.data.titulo+' salvo com Sucesso').
         this.listar()
       }).catch(e => {
         console.log(e.response.data.errors),
         alert(e.request.response)
-      })
-    },
+      })},
+      Excluir(id){
+      objeto.delete(id).
+      then(resposta =>{
+        this.objeto={},
+        alert(resposta.data.titulo+' salvo com Sucesso').
+        this.listar()
+      }).catch(e => {
+        alert("Erro:"+e),
+        console.log(e.response.data.errors),
+        alert(e.request.response)
+      })},  
     Pesquisar(){
         const field = document.querySelector("input[name=input]").value
-        alert('Em desenvolvimento'+ field)
         objeto.Buscar(field).
         then(resposta=>{
-            this.objetos = resposta.data
-            alert("Funfou:"+resposta.data)
+            this.objetos = resposta.data            
         }).catch(e => {
       alert("Erro ao conectar com o backend, retonorno:"+e)
     })},
