@@ -7,5 +7,8 @@ export default {
 
     salvar: (objeto) => {
         return http.post('cadastro/', objeto)
-    }
+    },
+    Buscar: (titulo) => {
+        return http.get('buscar/?autor='+titulo)
+    },
 }

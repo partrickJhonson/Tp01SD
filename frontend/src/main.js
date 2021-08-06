@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import Cadastro from './components/Cadastro'
-import Index    from './components/Index'
+import Index    from './components/index'
 
 Vue.use(VueRouter)
 
