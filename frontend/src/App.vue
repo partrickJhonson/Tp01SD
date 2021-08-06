@@ -1,4 +1,3 @@
-<!-- inicio da definição do templete da telas -->
 <template>
   <div id="app">
 
@@ -11,6 +10,10 @@
   </div>
 </template>
 
-<!-- Apartir desse ponto inicia as implemtações para a comunicação com a api -->
+
 <script>
+export default{
+  mounted(){ //Ao abri o site direciona pra index
+    this.$router.push('/index');
+  }}
 </script>
