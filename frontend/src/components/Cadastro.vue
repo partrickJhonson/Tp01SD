@@ -219,8 +219,8 @@ export default{
       objetos:[],//Varivel que recebe todos os objetos salvos na base de dados
       errors:[],//Gurda os erros para aletar o usuario
       objeto:{//Variavel para guardar todos os dados os Campos do IEELOM 
-    titulo:'',
-    catalogo:'',
+    titulo:null,
+    catalogo:null,
     lingua:'',
     descrisao:'',
     palavrachave:'',
