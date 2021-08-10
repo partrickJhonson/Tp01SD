@@ -27,8 +27,8 @@
             <td>{{ objeto.titulo }}</td>
             <td>{{ objeto.Npaginas }}</td>
             <td>
-              <button @click.prevent="Excluir(objeto.id_bidentificador) " class="waves-effect btn-small red darken-1">Excluir</button>
-              <button @click.prevent="Alterar(objeto.id_bidentificador) " class="waves-effect btn-small green darken-1">Alterar</button>
+              <button @click.prevent="Excluir(objeto.id_identificador) " class="waves-effect btn-small red darken-1">Excluir</button>
+              <button @click.prevent="Alterar(objeto.id_identificador) " class="waves-effect btn-small green darken-1">Alterar</button>
             </td>
 
           </tr>
@@ -170,8 +170,7 @@ export default{
         this.$router.push('/Cadastro')
     },
     Alterar(id){
-      this.$router.push('/Cadastro/'+id),
-      this.$codalterar=id
+      this.$router.push('/Cadastro/'+id)
     }
            
   }

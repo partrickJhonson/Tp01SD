@@ -4,7 +4,7 @@ from uuid import uuid4
 
 class Cadastro(models.Model):
     #Geral
-    id_bidentificador = models.UUIDField(primary_key=True, default=uuid4,editable=False)
+    id_identificador = models.UUIDField(primary_key=True, default=uuid4,editable=False)
     titulo = models.CharField(max_length=20)
     catalogo = models.CharField(max_length=20,null=True,blank=True)
     EntradaNoCatalogo = models.DateField(auto_now_add=True)

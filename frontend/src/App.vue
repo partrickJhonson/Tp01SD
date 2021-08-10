@@ -17,11 +17,6 @@
 export default{
   mounted(){ //Ao abri o site direciona pra index
      this.$router.push('/index');     
-  },data(){
-    return{
-    codalterar:'387b5b34-da30-4f73-9ef5-93bfac010beb'
-    }
   }
-  
-  }
+}
 </script>

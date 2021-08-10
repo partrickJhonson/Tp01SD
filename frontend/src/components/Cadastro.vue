@@ -1,7 +1,8 @@
 <!-- inicio da definição do templete da telas -->
 <template>
   <div id="app">
-   <th> <button v-on:click="Volta()" class="waves-effect btn-small lilac darken-1">Pagína Inicial</button> </th>  
+   <th> <button v-on:click="Volta()" class="waves-effect btn-small lilac darken-1">Pagína Inicial</button> </th> 
+   <div>User {{ this.$route.params.id }}</div>
     <nav>
       <div class="nav-wrapper blue darken-1">
         <a href="//" class="brand-logo center"> Cadastro de Metadados</a>
@@ -219,8 +220,8 @@ export default{
       objetos:[],//Varivel que recebe todos os objetos salvos na base de dados
       errors:[],//Gurda os erros para aletar o usuario
       objeto:{//Variavel para guardar todos os dados os Campos do IEELOM 
-    titulo:null,
-    catalogo:null,
+    titulo:'',
+    catalogo:'',
     lingua:'',
     descrisao:'',
     palavrachave:'',
@@ -291,11 +292,13 @@ export default{
   },
 //Inicio das Funções 
   mounted(){//Ao abri o site realiza a listagem dos dados é inicia a varivel que ira receber os dados para cadastro
-    objeto.BuscarId(this.$codalterar).
+    alert('antes da busca '+this.$route.params.id),
+    objeto.BuscarId(this.$route.params.id).
     then(resposta=>{
-    this.objetos = resposta.data   
-    alert('retorno '+resposta.data.titulo)
-  })},
+    this.objeto = resposta.data[0]
+    }).catch(e => {
+      alert("Erro ao conectar com o backend, retonorno:"+e)
+    })},
   methods:{// funções que tratam a comunicação com a api. OBS a comunicação é feita pelo componente o objeto aki é feito apenas os tratamentos dos dados
 
     listar(){

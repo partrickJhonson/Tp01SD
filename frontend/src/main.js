@@ -9,7 +9,7 @@ const router = new VueRouter({
     mode: "history",
     routes: [
         {path: "/",redirect: Index},//Direciona o user para a rota inicia
-        {path: "/Cadastro",component: Cadastro},
+        {path: '/Cadastro/:id',component: Cadastro},
         {path: "/index",component: Index},
         {path: "",redirect: Index},
     ]
