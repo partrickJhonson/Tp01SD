@@ -309,15 +309,29 @@ export default{
     })
     },
     salvar(){
-      objeto.salvar(this.objeto).
-      then(resposta =>{
-        this.objeto={}
-        alert(resposta.data.titulo+' salvo com Sucesso')
-        this.listar()
-      }).catch(e => {
+      if (!this.objeto.id_identificador){
+         objeto.salvar(this.objeto).
+          then(resposta =>{
+          this.objeto={}
+          alert(resposta.data.titulo+' salvo com Sucesso')
+          this.listar()        
+         }).catch(e => {
         console.log(e.response.data.errors),
         alert(e.request.response)
-       })},
+       })       
+      }else{
+        objeto.alterar(this.objeto.id_identificador,this.objeto).
+          then(resposta =>{
+          this.objeto={}
+          alert(resposta.data.titulo+' Alterado com Sucesso')
+          this.listar()        
+         }).catch(e => {
+        console.log(e.response.data.errors),
+        alert(e.request.response)
+       })
+      }
+       
+       },
     Volta(){
         this.$router.push('/index')
     }, 

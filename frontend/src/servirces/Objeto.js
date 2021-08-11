@@ -17,4 +17,7 @@ export default {
     delete: (id) => {
         return http.delete('buscar/'+id)//Montar uma string com campo concatenando todos os campos com a texto a ser buscado
     },
+    alterar:(id,objeto)=>{
+        return http.put('cadastro/'+objeto.id_identificador+'/', objeto)
+    }
 }
