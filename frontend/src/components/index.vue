@@ -1,13 +1,17 @@
 <!-- inicio da definição do templete da telas -->
 <template>
   <div id="app">
+      <nav>
+         <div class="nav-wrapper blue darken-1">
+            <a  href="//" class="brand-logo center"> Seja bem-vindo ao nosso acervo de Metadados!</a>
+         </div>
+      </nav>
       <th> <button v-on:click="Ircad()" class="waves-effect btn-small lilac darken-1">Cadastrar</button> </th>
-      <h2 class="brand-logo center"> Coleção de Obejetos</h2>
       <div >
-           <th><input   type="text" placeholder="autor" name="input"> </th>
-           <th> <button v-on:click="Pesquisar()" class="waves-effect btn-small blue darken-1">Pesquisar</button> </th>
-            
-       </div>
+           <th><input   type="text" placeholder="Texto da busca" name="input"> </th>
+           <th> <button v-on:click="Pesquisar()" class="waves-effect btn-small blue darken-1">Pesquisar Todos Campos</button> </th>
+           <th> <button v-on:click="Pesquisar()" class="waves-effect btn-small blue darken-1">Pesquisar Campos Selecionados</button> </th>            
+      </div>
       <table @submit.prevent="">        
         <thead>
 

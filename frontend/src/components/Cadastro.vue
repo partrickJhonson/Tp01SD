@@ -292,13 +292,19 @@ export default{
   },
 //Inicio das Funções 
   mounted(){//Ao abri o site realiza a listagem dos dados é inicia a varivel que ira receber os dados para cadastro
-    alert('antes da busca '+this.$route.params.id),
-    objeto.BuscarId(this.$route.params.id).
-    then(resposta=>{
-    this.objeto = resposta.data[0]
-    }).catch(e => {
-      alert("Erro ao conectar com o backend, retonorno:"+e)
-    })},
+    if (!this.$route.params.id==''){
+      alert('antes da busca '+this.$route.params.id),
+      objeto.BuscarId(this.$route.params.id).
+      then(resposta=>{
+      this.objeto = resposta.data[0]
+      }).catch(e => {
+        alert("Erro ao conectar com o backend, retonorno:"+e)
+      })
+    }
+    else{
+      alert('Sem Busca')
+    }
+    },
   methods:{// funções que tratam a comunicação com a api. OBS a comunicação é feita pelo componente o objeto aki é feito apenas os tratamentos dos dados
 
     listar(){
