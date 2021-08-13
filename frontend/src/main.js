@@ -4,7 +4,11 @@ import VueRouter from 'vue-router'
 import Cadastro from './components/Cadastro'
 import Index    from './components/index'
 
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css'
+
 Vue.use(VueRouter)
+Vue.component("v-select",vSelect);
 const router = new VueRouter({
     mode: "history",
     routes: [

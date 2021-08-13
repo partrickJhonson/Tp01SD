@@ -2,7 +2,6 @@
 <template>
   <div id="app">
    <th> <button v-on:click="Volta()" class="waves-effect btn-small lilac darken-1">Pagína Inicial</button> </th> 
-   <div>User {{ this.$route.params.id }}</div>
     <nav>
       <div class="nav-wrapper blue darken-1">
         <a href="//" class="brand-logo center"> Cadastro de Metadados</a>
@@ -212,7 +211,7 @@
 <!-- Apartir desse ponto inicia as implemtações para a comunicação com a api -->
 <script>
 //inicio da definição do templete da telas
-import objeto from "/home/sd/Documents/GitHub/Tp01SD/frontend/src/servirces/Objeto.js" //Componente responsavel por realizar a comunicação com a api
+import Dados from "../servirces/Dados.js" //Componente responsavel por realizar a comunicação com a api
 
 export default{
   data(){//Variaveis
@@ -291,32 +290,28 @@ export default{
     }
   },
 //Inicio das Funções 
-  mounted(){//Ao abri o site realiza a listagem dos dados é inicia a varivel que ira receber os dados para cadastro
+  mounted(){// Verifica se está inserindo ou atualizando caso atualizando carrega os dados para visualização
     if (!this.$route.params.id==''){
-      alert('antes da busca '+this.$route.params.id),
-      objeto.BuscarId(this.$route.params.id).
+      Dados.BuscarId(this.$route.params.id).
       then(resposta=>{
       this.objeto = resposta.data[0]
       }).catch(e => {
         alert("Erro ao conectar com o backend, retonorno:"+e)
       })
     }
-    else{
-      alert('Sem Busca')
-    }
     },
-  methods:{// funções que tratam a comunicação com a api. OBS a comunicação é feita pelo componente o objeto aki é feito apenas os tratamentos dos dados
+  methods:{// funções que tratam a comunicação com a api. OBS a comunicação é feita pelo componente o Dados aki é feito apenas os tratamentos dos dados
 
     listar(){
-      objeto.listar().then(resposta => {
+      Dados.listar().then(resposta => {
       this.objetos = resposta.data
     }).catch(e => {
       alert("Erro ao conectar com o backend, retonorno:"+e)
     })
     },
     salvar(){
-      if (!this.objeto.id_identificador){
-         objeto.salvar(this.objeto).
+      if (!this.objeto.id_identificador){//Casa temha id significa que está alterando
+         Dados.salvar(this.objeto).
           then(resposta =>{
           this.objeto={}
           alert(resposta.data.titulo+' salvo com Sucesso')
@@ -326,7 +321,7 @@ export default{
         alert(e.request.response)
        })       
       }else{
-        objeto.alterar(this.objeto.id_identificador,this.objeto).
+        Dados.alterar(this.objeto.id_identificador,this.objeto).
           then(resposta =>{
           this.objeto={}
           alert(resposta.data.titulo+' Alterado com Sucesso')

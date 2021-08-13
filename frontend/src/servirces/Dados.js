@@ -9,13 +9,16 @@ export default {
         return http.post('cadastro/', objeto)
     },
     Buscar: (textoBusca) => {
-        return http.get('buscar/?search='+textoBusca)//Montar uma string com campo concatenando todos os campos com a texto a ser buscado
+        return http.get('buscar/?search='+textoBusca)//BUsca em todos os campos
+    },
+    BuscarCampos: (textoBusca) => {
+        return http.get('buscar/?'+textoBusca)//Montar uma string com campo concatenando todos os campos com a texto a ser buscado
     },
     BuscarId: (textoBusca) => {
-        return http.get('buscar/?id_identificador='+textoBusca)//Montar uma string com campo concatenando todos os campos com a texto a ser buscado
+        return http.get('buscar/?id_identificador='+textoBusca)//Busca para alterar
     },   
     delete: (id) => {
-        return http.delete('buscar/'+id)//Montar uma string com campo concatenando todos os campos com a texto a ser buscado
+        return http.delete('buscar/'+id)//
     },
     alterar:(id,objeto)=>{
         return http.put('cadastro/'+objeto.id_identificador+'/', objeto)
