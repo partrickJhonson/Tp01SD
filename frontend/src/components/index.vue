@@ -6,11 +6,11 @@
             <a  href="//" class="brand-logo center"> Seja bem-vindo ao nosso acervo de Metadados!</a>
          </div>
       </nav>
-      <th> <button v-on:click="Ircad()" class="waves-effect btn-small lilac darken-1">Cadastrar</button> </th>
       <div >
            <v-select  multiple v-model="camposSel" :options="campos" placeholder="Todos os Campos"></v-select>
            <th><input   type="text" placeholder="Texto da busca" name="input"> </th>
            <th> <button v-on:click="Pesquisar()" class="waves-effect btn-small blue darken-1">Buscar</button> </th>
+           <th> <button v-on:click="Ircad()" class="waves-effect btn-small lilac darken-1">Cadastrar</button> </th>
       </div>
       <table @submit.prevent="">        
         <thead>
@@ -149,9 +149,10 @@ export default{
         then(id=>{
         this.objeto={},
         this.listar(),
-        alert('user id='+id+' Excluido com Sucesso')
+        alert('Excluido com Sucesso'),
+        console.log(id);
       }).catch(e => {
-        alert("Erro:"+e),
+        alert("Erro a excluir id:"+id+""+e),
         console.log(e.response.data.errors)
       })},  
     Pesquisar(){

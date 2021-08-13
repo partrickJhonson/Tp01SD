@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view></router-view><!--Instancia as rotas no app principal -->
+    <router-view></router-view><!--Instancia as rotas no app principal todos os componentes presentes nas rotas seram mostrados apartir desse ponto --> 
      <br>
 </div>
 

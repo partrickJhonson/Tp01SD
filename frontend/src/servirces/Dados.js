@@ -18,7 +18,7 @@ export default {
         return http.get('buscar/?id_identificador='+textoBusca)//Busca para alterar
     },   
     delete: (id) => {
-        return http.delete('buscar/'+id)//
+        return http.delete('cadastro/'+id)//
     },
     alterar:(id,objeto)=>{
         return http.put('cadastro/'+objeto.id_identificador+'/', objeto)
