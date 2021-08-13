@@ -7,7 +7,7 @@
          </div>
       </nav>
       <div >
-           <v-select  multiple v-model="camposSel" :options="campos" placeholder="Todos os Campos"></v-select>
+           <v-select  multiple v-model="camposSel" :options="campos" placeholder="Buscar em Todos os Campos"></v-select>
            <th><input   type="text" placeholder="Texto da busca" name="input"> </th>
            <th> <button v-on:click="Pesquisar()" class="waves-effect btn-small blue darken-1">Buscar</button> </th>
            <th> <button v-on:click="Ircad()" class="waves-effect btn-small lilac darken-1">Cadastrar</button> </th>
@@ -16,9 +16,13 @@
         <thead>
 
           <tr>
+            <th>Data de Entrada</th>
             <th>Autor</th>
             <th>Titulo</th>
             <th>N° Páginas</th>
+            <th>Descrisão</th>
+            <th>Lingua</th>
+            <th>Localização</th>
             <th>OPÇÕES</th>
           </tr>
 
@@ -26,10 +30,13 @@
 
         <tbody>
           <tr v-for="objeto of objetos" :key="objeto.id">
-
+            <td>{{ objeto.EntradaNoCatalogo }}</td>
             <td>{{ objeto.autor }}</td>
             <td>{{ objeto.titulo }}</td>
             <td>{{ objeto.Npaginas }}</td>
+            <td>{{ objeto.Descrisao }}</td>
+            <td>{{ objeto.Lingua }}</td>
+            <td>{{ objeto.localizacao }}</td>
             <td>
               <button @click.prevent="Excluir(objeto.id_identificador) " class="waves-effect btn-small red darken-1">Excluir</button>
               <button @click.prevent="Alterar(objeto.id_identificador) " class="waves-effect btn-small green darken-1">Alterar</button>
