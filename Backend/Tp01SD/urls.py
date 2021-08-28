@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django import urls
 from django.contrib import admin
 from django.urls import path,include
 
@@ -24,8 +25,8 @@ route = routers.DefaultRouter()
 route.register(r'cadastro',cadastroviewsetes.CadastroViewSet, basename="Cadastro")
 route.register(r'buscar',BuscarViewSet.BuscarViewSet, basename="Buscar")
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include(route.urls))
+    path('api/v1/',include(route.urls)),
+    path('auth/',include('cadastro.urls')),
 ]

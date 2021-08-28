@@ -1,9 +1,18 @@
-from rest_framework.views import viewsets
-from . import models
-from . import serializer
-from Backend import cadastro
+from django.http import response
+from .serializers import RegisterSerilizer
+from rest_framework import generics,status
+from rest_framework.response import Response
 
-class Cadastro_Buscar(viewsets.ModelViewSet):
-    queryset = models.cadastro.objects.all()
-    serializer = serializer(cadastro.data)
-    
+
+
+class RegisterView(generics.GenericAPIView):
+    serializer_class=RegisterSerilizer
+    def post (self, request):
+        user = request.data
+        serializer = self.serializer_class(data=user)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        user_data =serializer.data
+
+        return Response(user_data,status=status.HTTP_201_CREATED)

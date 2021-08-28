@@ -19,7 +19,7 @@
         <input type="text" placeholder="Caralogo" v-model="objeto.catalogo">
 
         <label>Língua</label>
-        <input type="text" placeholder="Lingua" v-model="objeto.lingua">
+        <input type="text" placeholder="Lingua" v-model="objeto.Lingua">
 
         <label>Descrisão</label>
         <input type="text" placeholder="Descrisão" v-model="objeto.descrisao">
@@ -221,7 +221,7 @@ export default{
       objeto:{//Variavel para guardar todos os dados os Campos do IEELOM 
     titulo:'',
     catalogo:'',
-    lingua:'',
+    Lingua:'',
     descrisao:'',
     palavrachave:'',
     corbertura:'',

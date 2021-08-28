@@ -9,6 +9,7 @@ class CadastroViewSet(viewsets.ModelViewSet):
     queryset = models.Cadastro.objects.all()
     filter_backends =[DjangoFilterBackend,OrderingFilter]
     ordering_fields = ['EntradaNoCatalogo']
+  
 
 class BuscarViewSet(viewsets.ModelViewSet):
     serializer_class = serializer.CadastroSerializer
