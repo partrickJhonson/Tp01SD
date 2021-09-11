@@ -294,7 +294,8 @@ export default{
     if (!this.$route.params.id==''){
       Dados.BuscarId(this.$route.params.id).
       then(resposta=>{
-      this.objeto = resposta.data[0]
+      this.objeto = JSON.parse(resposta.request.response)['results'][0],
+      console.log(JSON.parse(resposta.request.response)['results'][0])
       }).catch(e => {
         alert("Erro ao conectar com o backend, retonorno:"+e)
       })

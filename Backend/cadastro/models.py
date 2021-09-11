@@ -1,6 +1,9 @@
 from django.db import models
 from uuid import UUID, uuid4
 from django.contrib.auth.models import (AbstractBaseUser,BaseUserManager,PermissionsMixin, User, UserManager)
+from rest_framework_simplejwt.tokens import RefreshToken
+
+AUTH_PROVIDERS = {'email': 'email'}
 
 class Usuario(BaseUserManager):
     def create_user(self,username,email,password=None):
@@ -33,7 +36,9 @@ class User(AbstractBaseUser,PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
-
+    auth_provider = models.CharField(
+        max_length=255, blank=False,
+        null=False, default=AUTH_PROVIDERS.get('email'))
     USERNAME_FIELD ='email'
     REQUIRED_FIELDS = ['username']
 
@@ -45,7 +50,11 @@ class User(AbstractBaseUser,PermissionsMixin):
         return self.email
 
     def tokens(self):
-        return ''    
+        refresh = RefreshToken.for_user(self)
+        return {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token)
+        } 
 
 
 class Cadastro(models.Model):

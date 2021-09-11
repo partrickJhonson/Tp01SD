@@ -29,7 +29,7 @@
         </thead>
 
         <tbody>
-          <tr v-for="objeto of objetos" :key="objeto.id">
+          <tr v-for="objeto of this.objetos" :key="objeto.id">
             <td>{{ objeto.EntradaNoCatalogo }}</td>
             <td>{{ objeto.autor }}</td>
             <td>{{ objeto.titulo }}</td>
@@ -146,7 +146,8 @@ export default{
 
     listar(){
       Dados.listar().then(resposta => {
-      this.objetos = resposta.data
+      this.objetos = JSON.parse(resposta.request.response)['results']
+      console.log(JSON.parse(resposta.request.response)['results'])
     }).catch(e => {
       alert("Erro ao conectar com o backend, retonorno:"+e)
     })
@@ -167,7 +168,7 @@ export default{
         if(this.camposSel==""){            
             Dados.Buscar(field).
             then(resposta=>{
-                this.objetos = resposta.data            
+                this.objetos = JSON.parse(resposta.request.response)['results']           
             }).catch(e => {
           alert("Erro ao conectar com o backend, retonorno:"+e)})
         }else{
@@ -176,7 +177,7 @@ export default{
           }
           Dados.BuscarCampos(this.textobusca.substring(0, this.textobusca.length - 2)).
           then(resposta=>{
-            this.objetos = resposta.data 
+            this.objetos = JSON.parse(resposta.request.response)['results']
           }).catch(e => {
           alert("Erro ao conectar com o backend, retonorno:"+e)})
         }
