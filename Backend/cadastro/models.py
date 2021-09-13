@@ -21,7 +21,7 @@ class Usuario(BaseUserManager):
     def create_superuser(self,username,email,password=None):
     
         if password is None:
-            raise TypeError('Senha não pode ser nulo')
+            raise TypeError('Senha não pode ser nula')
         user=self.create_user(username,email,password)        
         user.is_superuser=True
         user.is_staff = True
@@ -34,6 +34,9 @@ class User(AbstractBaseUser,PermissionsMixin):
     is_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
+    excluir = models.BooleanField(default=False)
+    alterar = models.BooleanField(default=False)
+    cadastrar = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
     auth_provider = models.CharField(

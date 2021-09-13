@@ -22,5 +22,20 @@ export default {
     },
     alterar:(id,objeto)=>{
         return http.put('api/v1/cadastro/'+objeto.id_identificador+'/', objeto)
-    }
+    },
+    login:(dados)=>{
+        return http.post('auth/Login/', dados)
+    },
+    CadastroUser:(dados)=>{
+        return http.post('auth/register/', dados)
+    },
+    ListaAllUser:()=>{
+        return http.get('api/v1/buscaruser/')
+    },
+    ListaUser:(name)=>{
+        return http.get('api/v1/buscaruser/?username='+name)
+    },
+    alterarUser:(form)=>{
+        return http.put('api/v1/buscaruser/'+form.id+'/',form)
+    },
 }

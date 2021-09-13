@@ -1,6 +1,8 @@
 from django.db.models import fields
+from django.db.models.base import Model
 from rest_framework import serializers
 from  .models import User
+from cadastro import models
 from django.contrib import auth
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
@@ -11,7 +13,7 @@ class RegisterSerilizer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['email','username','password']
+        fields = ['email','username','excluir','alterar','cadastrar','password']
 
 
         def validate(self, attrs):
@@ -37,7 +39,6 @@ class LoginSerializer(serializers.ModelSerializer):
     username = serializers.CharField(
         max_length=255, min_length=3, read_only=True)
 
-    tokens = serializers.SerializerMethodField()
 
     def get_tokens(self, obj):
         user = User.object.get(email=obj['email'])
@@ -49,30 +50,42 @@ class LoginSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['email', 'password', 'username', 'tokens']
+        fields = ['email', 'password', 'username','excluir','alterar','cadastrar', 'tokens']
 
     def validate(self, attrs):
         email = attrs.get('email', '')
         password = attrs.get('password', '')
-        filtered_user_by_email = User.object.get(email=email)
-        #user = auth.authenticate(email=email, password=password)
-        user=User.object.get(email=email, password=password)
-        if filtered_user_by_email.exists() and filtered_user_by_email[0].auth_provider != 'email':
-            raise AuthenticationFailed(
-                detail='Continue seu login usando:' + filtered_user_by_email[0].auth_provider)
+        try:
+            user = auth.authenticate(email=email, password=password)
+            user=User.object.get(email=email, password=password)
 
-        if not user:
-            raise AuthenticationFailed('Dados invalidos, Tente Novamente')
-        if not user.is_active:
-            raise AuthenticationFailed('Usuário desativado, contate o admin'+user.username)
-        if not user.is_verified:
-            raise AuthenticationFailed('Email não foi verificado')
-
+            if not user:
+                raise AuthenticationFailed('Dados invalidos, Tente Novamente')
+            if not user.is_active:
+                raise AuthenticationFailed('Usuário desativado, contate o admin'+user.username)
+            if not user.is_verified:
+                raise AuthenticationFailed('Email não foi verificado') 
+        except User.DoesNotExist:    
+            try:
+                user=User.object.get(email=email)
+                if user:
+                 raise AuthenticationFailed('Senha invalida')
+            except: 
+                 raise AuthenticationFailed('Email não Encontrado')
         return {
-            'email': user.email,
+            'email':    user.email,
             'username': user.username,
-            'tokens': user.tokens
+            'tokens':   user.tokens,
+            'excluir':  user.excluir,
+            'alterar':  user.alterar,
+            'cadastrar': user.cadastrar
         }
 
         return super().validate(attrs)
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = '__all__'
+
     

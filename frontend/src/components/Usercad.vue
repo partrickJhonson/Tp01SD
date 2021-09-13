@@ -1,9 +1,18 @@
 <template>
-  <form @submit.prevent="">
+  <form @submit.prevent="CadastroUser()">
     <div class="login-page">
       <div class="card">
         <div class="card-header">
-          Login
+          Cadastro de Usuário
+        </div>
+        <div class="form-group">
+          <input
+            required
+            type="Nome do Usuário"
+            placeholder="Nome User"
+            class="form-control"
+            v-model="form.username"
+          >
         </div>
         <div class="card-body">
           <div class="form-group">
@@ -24,10 +33,9 @@
               v-model="form.password"
             >
           </div>
-
-          <th><button v-on:click="login()" class="btn btn-primary w-100">Entrar</button></th>
-          <th><button v-on:click="Cadastro()" class="btn btn-primary w-100">Cadastar</button></th>
-
+          <button class="btn btn-primary w-100">
+            Salvar
+          </button>
         </div>
       </div>
     </div>
@@ -42,9 +50,13 @@ export default {
     form: {
       email: 'patrick.jhonsom@ufvjm.edu.br',
       password: '1234567',
+      username: '',
+      excluir: true,
+      alterar: true,
+      cadastrar: true,
     },
-    username:{},
-    token:{}
+    username:'',
+    token:''
   }),
   computed:{
      ...mapState({
@@ -55,28 +67,24 @@ export default {
     console.log(this.user)
   },
   methods: {
-      login(){          
-        Dados.login(this.form).then(resposta=>{         
-          this.setuser      (resposta.data['username' ])
-          this.settoken     (resposta.data['tokens'   ]['access'])
-          this.setexcluir   (resposta.data['excluir'  ])
-          this.setalterar   (resposta.data['alterar'  ])
-          this.setcadastrar (resposta.data['cadastrar'])
+      CadastroUser(){          
+        Dados.CadastroUser(this.form).then(resposta=>{
+          this.username=resposta.data['username']
+          //this.token=resposta.data['token']['access']
           console.log(resposta.data)
-          this.$router.push('/index')
+          alert('Usuário Cadastrado com sucesso!')
+          this.$router.push('/login')
         }).catch(e => {
-         console.log(e.response)
+        try {
+            alert(e.response.data['email'][0])            
+        } catch (error) {
+            alert(e.response.data['username'][0])
+        }
       })
-      },
-      Cadastro(){
-         this.$router.push('/CadUser')
       },
       ...mapMutations ([
            'setuser',
-           'settoken',
-           'setexcluir',
-           'setalterar',
-           'setcadastrar'
+           'settoken'
       ]),
        
 

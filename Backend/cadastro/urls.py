@@ -1,7 +1,7 @@
 from django.urls import path
 from django.urls.converters import register_converter
 from django.urls import path
-from .views import RegisterView,VerifyEmail,LoginAPIView
+from .views import RegisterView,VerifyEmail,LoginAPIView,BuscarUser
 
 
 
