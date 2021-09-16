@@ -7,16 +7,10 @@
         </div>
         <div class="card-body">
           <div class="form-group">
-            <input
-              required
-              type="label"
-              v-model="retorno"
-              class="form-control"
-              placeholder=""
-            >
+            {{this.retorno}}             
           </div>
 
-          <th><button v-on:click="login()" class="btn btn-primary w-100">Entrar</button></th>         
+          <th><button v-on:click="irlogin()" class="btn btn-primary w-100">Entrar</button></th>         
         </div>
       </div>
     </div>
@@ -27,7 +21,7 @@
 import Dados from "../servirces/Dados.js" //Componente responsavel por realizar a comunicação com a api
 export default {
   data: () => ({
-      retorno:''
+      retorno:'Processando Token'
   }),
     mounted(){//Ao abri o site realiza a listagem dos dados é inicia a varivel que ira receber os dados para cadastro
     this.login()
@@ -35,14 +29,14 @@ export default {
   methods: {
       login(){          
         Dados.verificaremail(this.$route.params.token).then(resposta=>{         
-          console.log(resposta.data)
+          this.retorno=resposta.data['email']
         }).catch(e => {
          alert(e.response.data['error'])
          this.retorno=e.response.data['error']
       })
       },
-      Cadastro(){
-         this.$router.push('/CadUser')
+      irlogin(){
+         this.$router.push('/login')
       }
   }
 }

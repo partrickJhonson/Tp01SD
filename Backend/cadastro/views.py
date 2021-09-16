@@ -31,9 +31,9 @@ class RegisterView(generics.GenericAPIView):
         
         current_site = get_current_site(request).domain
         relativeLink = reverse('VerifyEmail')
-        absurl = 'http://'+current_site+relativeLink+"?token="+str(token)
+        absurl = 'http://localhost:8080/VerifiEmail/'+str(token)
         email_body = 'Olá '+user.username + \
-            ' Use o link para verificar se  email e liberar acesso ao nosso sistema \n' + absurl
+            ' Use o link para verificar seu  email e liberar acesso ao nosso sistema \n' + absurl
         data = {'email_body': email_body, 'to_email': user.email,
                 'email_subject': 'Verificação de Emaail'}
 
@@ -56,9 +56,9 @@ class VerifyEmail(views.APIView):
                 user.is_verified = True
                 user.is_active   = True
                 user.save()
-            return Response({'email': 'Successfully activated'}, status=status.HTTP_200_OK)
+            return Response({'email': 'Usuário Ativado com Secesso'}, status=status.HTTP_200_OK)
         except jwt.ExpiredSignatureError as identifier:
-            return Response({'error': 'Activation Expired'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Token Expirado'}, status=status.HTTP_400_BAD_REQUEST)
         except jwt.exceptions.DecodeError as identifier:
             return Response({'error': ' token Inválido'}, status=status.HTTP_400_BAD_REQUEST)
     

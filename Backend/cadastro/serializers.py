@@ -61,10 +61,10 @@ class LoginSerializer(serializers.ModelSerializer):
 
             if not user:
                 raise AuthenticationFailed('Dados invalidos, Tente Novamente')
+            if not user.is_verified:
+                raise AuthenticationFailed('Email não foi verificado, Acesso link enviado no email cadastrado ')                 
             if not user.is_active:
                 raise AuthenticationFailed('Usuário:'+user.username+' desativado, contate o admin')
-            if not user.is_verified:
-                raise AuthenticationFailed('Email não foi verificado') 
         except User.DoesNotExist:    
             try:
                 user=User.object.get(email=email)
