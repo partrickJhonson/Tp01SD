@@ -35,7 +35,7 @@ class RegisterView(generics.GenericAPIView):
         email_body = 'Olá '+user.username + \
             ' Use o link para verificar se  email e liberar acesso ao nosso sistema \n' + absurl
         data = {'email_body': email_body, 'to_email': user.email,
-                'email_subject': 'Verify your email'}
+                'email_subject': 'Verificação de Emaail'}
 
         Util.send_email(data)
         return Response(user_data, status=status.HTTP_201_CREATED)
@@ -60,7 +60,7 @@ class VerifyEmail(views.APIView):
         except jwt.ExpiredSignatureError as identifier:
             return Response({'error': 'Activation Expired'}, status=status.HTTP_400_BAD_REQUEST)
         except jwt.exceptions.DecodeError as identifier:
-            return Response({'error': 'Invalid token: '+token}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': ' token Inválido'}, status=status.HTTP_400_BAD_REQUEST)
     
 class LoginAPIView(generics.GenericAPIView):
     serializer_class = LoginSerializer

@@ -38,4 +38,7 @@ export default {
     alterarUser:(form)=>{
         return http.put('api/v1/buscaruser/'+form.id+'/',form)
     },
+    verificaremail:(token)=>{
+        return http.get('auth/emailverify/?token'+token)
+    }
 }

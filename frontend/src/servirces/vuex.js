@@ -9,13 +9,15 @@ const store = new Vuex.Store({
        token:'',
        excluir:false,
        alterar:false,
-       cadastrar:false
+       cadastrar:false,
+       useradmin:false,
    },mutations:{//funcções responsavel por alterar variaveis do state
        setuser: (state,string)=>state.usuario=string,
        settoken: (state,string)=>state.token=string,
        setexcluir: (state,boolean)=>state.excluir =boolean,
        setalterar: (state,boolean)=>state.alterar =boolean,
-       setcadastrar: (state,boolean)=>state.cadastrar =boolean
+       setcadastrar: (state,boolean)=>state.cadastrar =boolean,
+       setuseradmin: (state,boolean)=>state.useradmin =boolean
    }
 })
 

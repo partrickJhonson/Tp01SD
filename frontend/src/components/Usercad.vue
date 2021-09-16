@@ -78,7 +78,11 @@ export default {
         try {
             alert(e.response.data['email'][0])            
         } catch (error) {
-            alert(e.response.data['username'][0])
+           try {
+             alert(e.response.data['username'][0])
+           } catch (error) {
+              alert("A senha deve ter no minimo 6 digitos")
+           } 
         }
       })
       },

@@ -140,7 +140,8 @@ export default{
   },
 //Inicio das Funções 
   mounted(){//Ao abri o site realiza a listagem dos dados é inicia a varivel que ira receber os dados para cadastro
-    this.listar();
+    this.VefificaUserlogado(),
+    this.listar(),
     this.objeto={}
   },
     computed:{
@@ -148,7 +149,8 @@ export default{
         user:      state=> state.usuario,
         excluir:   state=> state.excluir,
         alterar:   state=> state.alterar,
-        cadastrar: state=> state.cadastrar
+        cadastrar: state=> state.cadastrar,
+        admin:     state=> state.useradmin,
       })
   },
   methods:{// funções que tratam a comunicação com a api. OBS a comunicação é feita pelo componente o objeto aki é feito apenas os tratamentos dos dados
@@ -174,7 +176,7 @@ export default{
             console.log(e.response.data.errors)
         })
         }else {
-          alert("Predado(a) "+this.user+", Você não possui permisão Para excluir")
+          alert("Prezado(a) "+this.user+", Você não possui permisão Para excluir")
         }
       },  
     Pesquisar(){
@@ -200,17 +202,27 @@ export default{
         if (this.cadastrar){
           this.$router.push('/Cadastro')
         }else 
-        alert("Predado(a) "+this.user+", Você não possui permisão para fazer cadastros")
+        alert("Prezado(a) "+this.user+", Você não possui permisão para fazer cadastros")
     },
     Alterar(id){
       if(this.alterar){
         this.$router.push('/Cadastro/'+id)
       }else {
-        alert("Predado(a) "+this.user+", Você não possui permisão alterar dados")
+        alert("Prezado(a) "+this.user+", Você não possui permisão alterar dados")
       }
     },
     IrAltercadUser(){
+     console.log(this.admin)
+     if(this.admin){ 
      this.$router.push('/alterarpermisao/') 
+     }else {
+        alert("Prezado(a) "+this.user+" Somente o admin tem permisão para alterar dados dos usuários");          
+     }
+    },
+    VefificaUserlogado(){
+      if (this.user=='Ninguém'){
+        this.$router.push('/login/')
+      }
     }
            
   }

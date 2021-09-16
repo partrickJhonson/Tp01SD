@@ -10,20 +10,21 @@ import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
 import './assets/scss/app.scss'
 import alterarpermisao from './components/alterarpermisao'
+import VerifiEmail from './components/Verificaemail'
 
 Vue.use(VueRouter)
 Vue.component("v-select",vSelect);
 const router = new VueRouter({
     mode: "history",
     routes: [
-        {path: "/",redirect: Index},//Direciona o user para a rota inicia
+        {path: "/",redirect: login},//Direciona o user para a rota inicia
         {path: '/Cadastro/:id',component: Cadastro},//Altera
         {path: '/Cadastro',component: Cadastro},//CriarNovo
         {path: "/index",component: Index},
         {path: "/login",component: login},
         {path: "/CadUser",component: Usercad},
         {path: "/alterarpermisao",component: alterarpermisao},
-        {path: "",redirect: Index},
+        {path: "/VerifiEmail/:token",component: VerifiEmail},
     ]
 
 })

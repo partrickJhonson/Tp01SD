@@ -62,10 +62,12 @@ export default {
           this.setexcluir   (resposta.data['excluir'  ])
           this.setalterar   (resposta.data['alterar'  ])
           this.setcadastrar (resposta.data['cadastrar'])
+          this.setuseradmin (resposta.data['is_superuser'])
           console.log(resposta.data)
           this.$router.push('/index')
         }).catch(e => {
-         console.log(e.response)
+         console.log(e.response) 
+         alert(e.response.data['detail'])
       })
       },
       Cadastro(){
@@ -76,7 +78,8 @@ export default {
            'settoken',
            'setexcluir',
            'setalterar',
-           'setcadastrar'
+           'setcadastrar',
+           'setuseradmin'
       ]),
        
 

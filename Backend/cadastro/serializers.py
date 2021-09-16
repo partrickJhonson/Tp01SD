@@ -50,7 +50,7 @@ class LoginSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['email', 'password', 'username','excluir','alterar','cadastrar', 'tokens']
+        fields = ['email', 'password', 'username','excluir','alterar','cadastrar','is_superuser', 'tokens']
 
     def validate(self, attrs):
         email = attrs.get('email', '')
@@ -62,7 +62,7 @@ class LoginSerializer(serializers.ModelSerializer):
             if not user:
                 raise AuthenticationFailed('Dados invalidos, Tente Novamente')
             if not user.is_active:
-                raise AuthenticationFailed('Usuário desativado, contate o admin'+user.username)
+                raise AuthenticationFailed('Usuário:'+user.username+' desativado, contate o admin')
             if not user.is_verified:
                 raise AuthenticationFailed('Email não foi verificado') 
         except User.DoesNotExist:    
@@ -71,14 +71,15 @@ class LoginSerializer(serializers.ModelSerializer):
                 if user:
                  raise AuthenticationFailed('Senha invalida')
             except: 
-                 raise AuthenticationFailed('Email não Encontrado')
+                 raise AuthenticationFailed('Dados Inválidos')
         return {
             'email':    user.email,
             'username': user.username,
             'tokens':   user.tokens,
             'excluir':  user.excluir,
             'alterar':  user.alterar,
-            'cadastrar': user.cadastrar
+            'cadastrar':user.cadastrar,
+            'is_superuser': user.is_superuser
         }
 
         return super().validate(attrs)
