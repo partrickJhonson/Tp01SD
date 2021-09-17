@@ -62,8 +62,7 @@ export default {
           this.setexcluir   (resposta.data['excluir'  ])
           this.setalterar   (resposta.data['alterar'  ])
           this.setcadastrar (resposta.data['cadastrar'])
-          this.setuseradmin (resposta.data['is_superuser'])
-          console.log(resposta.data)
+          this.setuseradmin (resposta.data['is_superuser'])         
           this.$router.push('/index')
         }).catch(e => {
          console.log(e.response) 

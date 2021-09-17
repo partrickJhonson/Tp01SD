@@ -51,9 +51,9 @@ export default {
       email: 'patrick.jhonsom@ufvjm.edu.br',
       password: '1234567',
       username: '',
-      excluir: true,
-      alterar: true,
-      cadastrar: true,
+      excluir:   false,
+      alterar:   false,
+      cadastrar: false,
     },
     username:'',
     token:''
@@ -63,15 +63,12 @@ export default {
         user: state => state.usuario
       })
   },
-    mounted(){//Ao abri o site realiza a listagem dos dados é inicia a varivel que ira receber os dados para cadastro
-    console.log(this.user)
+    mounted(){
   },
   methods: {
       CadastroUser(){          
         Dados.CadastroUser(this.form).then(resposta=>{
-          this.username=resposta.data['username']
-          //this.token=resposta.data['token']['access']
-          console.log(resposta.data)
+          this.username=resposta.data['username']                    
           alert('Usuário Cadastrado com sucesso!')
           this.$router.push('/login')
         }).catch(e => {

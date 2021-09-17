@@ -11,7 +11,8 @@
            <th><input   type="text" placeholder="Texto da busca" name="input"> </th>
            <th> <button v-on:click="Pesquisar()" class="waves-effect btn-small blue darken-1">Buscar</button> </th>
            <th> <button v-on:click="Ircad()" class="waves-effect btn-small blue darken-1">Cadastrar</button> </th>
-            <th> <button v-on:click="IrAltercadUser()" class="waves-effect btn-small blue darken-1">Alterar Usuário</button> </th>
+           <th> <button v-on:click="IrAltercadUser()" class="waves-effect btn-small blue darken-1">Alterar Usuário</button> </th>
+           <th> <button v-on:click="Sair()" class="waves-effect btn-small RED darken-1">Sair</button> </th>
       </div>
       <table @submit.prevent="">        
         <thead>
@@ -57,7 +58,7 @@
 
 //inicio da definição do templete da telas
 import Dados from "../servirces/Dados.js" //Componente responsavel por realizar a comunicação com a api
-import {mapState} from 'vuex'
+import {mapState,mapMutations} from 'vuex'
 export default{
   data(){//Variaveis
     return{
@@ -158,7 +159,6 @@ export default{
     listar(){
       Dados.listar().then(resposta => {
       this.objetos = JSON.parse(resposta.request.response)['results']
-      console.log(JSON.parse(resposta.request.response)['results'])
     }).catch(e => {
       alert("Erro ao conectar com o backend, retonorno:"+e)
     })
@@ -212,7 +212,6 @@ export default{
       }
     },
     IrAltercadUser(){
-     console.log(this.admin)
      if(this.admin){ 
      this.$router.push('/alterarpermisao/') 
      }else {
@@ -223,7 +222,24 @@ export default{
       if (this.user=='Ninguém'){
         this.$router.push('/login/')
       }
-    }
+    },
+    Sair(){
+      this.setuser      ('Ninguém')
+      this.settoken     (false)
+      this.setexcluir   (false)
+      this.setalterar   (false)
+      this.setcadastrar (false)
+      this.setuseradmin (false)
+      this.$router.push('/login/')
+    },
+     ...mapMutations ([
+      'setuser',
+      'settoken',
+      'setexcluir',
+      'setalterar',
+      'setcadastrar',
+      'setuseradmin'
+      ]),
            
   }
 

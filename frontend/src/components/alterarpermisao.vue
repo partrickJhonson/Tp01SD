@@ -91,7 +91,8 @@ export default {
       })
   },
     mounted(){//Ao abri o site realiza a listagem dos dados é inicia a varivel que ira receber os dados para cadastro
-    this.listaUsers()
+     this.VefificaUserlogado()     
+     this.listaUsers()
   },
   methods: {
       Alterar(){   
@@ -128,7 +129,11 @@ export default {
             console.log(this.tlista)
         }        
       })},
-
+       VefificaUserlogado(){
+        if (this.user!='admin'){
+          this.$router.push('/login/')
+        }
+    },
       ...mapMutations ([
            'setuser',
            'settoken'

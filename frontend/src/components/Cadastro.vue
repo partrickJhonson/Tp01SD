@@ -212,7 +212,7 @@
 <script>
 //inicio da definição do templete da telas
 import Dados from "../servirces/Dados.js" //Componente responsavel por realizar a comunicação com a api
-
+import {mapState} from 'vuex'
 export default{
   data(){//Variaveis
     return{
@@ -289,13 +289,18 @@ export default{
 
     }
   },
+  computed:{
+   ...mapState({      
+      cadastrar: state=> state.cadastrar
+    })
+  },
 //Inicio das Funções 
   mounted(){// Verifica se está inserindo ou atualizando caso atualizando carrega os dados para visualização
+    this.VefificaUser()
     if (!this.$route.params.id==''){
       Dados.BuscarId(this.$route.params.id).
       then(resposta=>{
-      this.objeto = JSON.parse(resposta.request.response)['results'][0],
-      console.log(JSON.parse(resposta.request.response)['results'][0])
+      this.objeto = JSON.parse(resposta.request.response)['results'][0]
       }).catch(e => {
         alert("Erro ao conectar com o backend, retonorno:"+e)
       })
@@ -336,8 +341,12 @@ export default{
        },
     Volta(){
         this.$router.push('/index')
-    }, 
+    },
+    VefificaUser(){      
+      if (this.cadastrar==false){
+          this.$router.push('/login/')
+        }
+    } 
   }
-
 }
 </script>
